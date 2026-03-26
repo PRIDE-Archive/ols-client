@@ -76,6 +76,16 @@ public interface Client {
     List<Term> getTermsByName(String partialName, String ontologyId, boolean reverseKeyOrder) throws RestClientException;
 
     /**
+     * This function retrieve all the terms that contains in the name the partialName.
+     * @param name String to lookup in the name term
+     * @param ontologyId Ontology term
+     * @param reverseKeyOrder sort the hash in a reverse order
+     * @param exact if true, perform an exact match search
+     * @return list of terms.
+     */
+    List<Term> getTermsByName(String name, String ontologyId, boolean reverseKeyOrder, boolean exact) throws RestClientException;
+
+    /**
      * This function retrieve one specific term that is equal to the exactName.
      * @param exactName String to lookup in the name term
      * @param ontologyId Ontology term

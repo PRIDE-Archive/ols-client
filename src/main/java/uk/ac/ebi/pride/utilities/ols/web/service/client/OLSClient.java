@@ -505,11 +505,15 @@ public class OLSClient implements Client {
     }
 
     public List<Term> getTermsByName(String partialName, String ontologyID, boolean reverseKeyOrder) {
-        return getTermsByName(partialName, ontologyID, reverseKeyOrder, null);
+        return getTermsByName(partialName, ontologyID, reverseKeyOrder, null, false);
+    }
+
+    public List<Term> getTermsByName(String name, String ontologyID, boolean reverseKeyOrder, boolean exact) {
+        return getTermsByName(name, ontologyID, reverseKeyOrder, null, exact);
     }
 
     public List<Term> getTermsByNameFromParent(String partialName, String ontologyID, boolean reverseKeyOrder, String childrenOf) {
-        return getTermsByName(partialName, ontologyID, reverseKeyOrder, childrenOf);
+        return getTermsByName(partialName, ontologyID, reverseKeyOrder, childrenOf, false);
     }
 
     /**
@@ -522,12 +526,12 @@ public class OLSClient implements Client {
      * @return list of Terms.
      */
 
-    private List<Term> getTermsByName(String partialName, String ontologyID, boolean reverseKeyOrder, String childrenOf) {
+    private List<Term> getTermsByName(String partialName, String ontologyID, boolean reverseKeyOrder, String childrenOf, boolean exact) {
         List<Term> resultTerms;
         if (partialName == null || partialName.isEmpty())
             return Collections.emptyList();
 
-        resultTerms = searchByPartialTerm(partialName, ontologyID, childrenOf);
+        resultTerms = exact ? searchByExactTerm(partialName, ontologyID, childrenOf) : searchByPartialTerm(partialName, ontologyID, childrenOf);
 
         if (reverseKeyOrder) {
             Set<Term> newMap = new TreeSet<>(Collections.reverseOrder());
