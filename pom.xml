@@ -151,40 +151,23 @@
         </plugins>
     </build>
 
+    <!-- Repos and distribution -->
     <repositories>
         <repository>
-            <id>pst-release</id>
-            <name>EBI Nexus Repository</name>
-            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
-        </repository>
-        <repository>
-            <id>pst-snapshots</id>
-            <name>EBI Nexus Snapshots Repository</name>
-            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-snapshots</url>
+            <id>pride-private-maven</id>
+            <url>${PRIDE_PRIVATE_MAVEN_URL}</url>
         </repository>
     </repositories>
 
     <distributionManagement>
-        <!-- Deployment to EBI's release repository -->
         <repository>
-            <id>pst-release</id>
-            <name>EBI Nexus Repository</name>
-            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
+            <id>pride-private-maven</id>
+            <url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
         </repository>
-        <!-- Deployment to EBI's snapshot repository -->
         <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>pst-snapshots</id>
-            <name>EBI Nexus Snapshots Repository</name>
-            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-snapshots</url>
+            <id>pride-private-maven</id>
+            <url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <scm>
-        <connection>scm:git:https://github.com/PRIDE-Utilities/ols-client.git</connection>
-        <developerConnection>scm:git:https://github.com/PRIDE-Utilities/ols-client.git</developerConnection>
-        <url>https://github.com/PRIDE-Utilities/ols-client.git</url>
-        <tag>HEAD</tag>
-    </scm>
 
 </project>
