@@ -121,33 +121,48 @@
         </testResources>
 
         <plugins>
-            <!-- TODO - Review the use of this plugin, in case it is interesting to add to our devops infrastructure -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.5</version>
-<!--                <configuration>-->
-<!--                    <skipTests>${skipTests}</skipTests>-->
-<!--                </configuration>-->
-            </plugin>
-            <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <skip>true</skip>
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id> <!-- The actual id should be apparent from maven output -->
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <showDeprecation>true</showDeprecation>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
-                </configuration>
+                <version>3.8.1</version>
             </plugin>
         </plugins>
     </build>
